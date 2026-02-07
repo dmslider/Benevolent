@@ -1323,22 +1323,25 @@ section {
     }
 
     .nav-menu {
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 60px;
         left: 0;
         right: 0;
+        bottom: 0;
         background-color: var(--primary-white);
         flex-direction: column;
         list-style: none;
         max-height: 0;
-        overflow: hidden;
+        overflow-y: auto;
+        overflow-x: hidden;
         transition: max-height var(--transition-base);
         gap: 0;
         border-bottom: 2px solid var(--primary-black);
+        z-index: 999;
     }
 
     .nav-menu.active {
-        max-height: 500px;
+        max-height: calc(100vh - 60px);
     }
 
     .nav-menu li {
@@ -1356,7 +1359,7 @@ section {
         position: static;
         opacity: 0;
         visibility: hidden;
-        height: 0;
+        max-height: 0;
         transform: none;
         box-shadow: none;
         border: none;
@@ -1369,13 +1372,18 @@ section {
     .dropdown.active .dropdown-menu {
         opacity: 1;
         visibility: visible;
-        height: auto;
+        max-height: 500px;
         padding: var(--spacing-sm) 0;
+        overflow-y: auto;
     }
 
     .dropdown-menu li a {
         padding-left: calc(var(--spacing-lg) * 2);
         font-size: 0.85rem;
+    }
+
+    body.menu-open {
+        overflow: hidden;
     }
 
     /* Hero Mobile */

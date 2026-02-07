@@ -116,6 +116,13 @@ function initMobileMenu() {
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (navMenu.classList.contains('active')) {
+            document.body.classList.add('menu-open');
+        } else {
+            document.body.classList.remove('menu-open');
+        }
     });
 
     // Close menu when link is clicked
@@ -123,6 +130,7 @@ function initMobileMenu() {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
         });
     });
 
@@ -148,6 +156,7 @@ function initMobileMenu() {
         if (window.innerWidth > 767) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
         }
     });
 }
