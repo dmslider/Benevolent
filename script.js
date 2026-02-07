@@ -126,33 +126,52 @@ function initMobileMenu() {
         }
     });
 
-    // Close menu when link is clicked
+    // Handle dropdown menu links separately
+    const dropdowns = document.querySelectorAll('.dropdown');
+    
+    // Close menu when non-dropdown link is clicked
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // Only close if it's not a dropdown toggle
-            if (!link.parentElement.classList.contains('dropdown')) {
+        if (!link.parentElement.classList.contains('dropdown')) {
+            link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
                 body.classList.remove('menu-open');
-            }
-        });
-    });
-
-    // Handle dropdown menus on mobile
-    const dropdowns = document.querySelectorAll('.dropdown');
-    dropdowns.forEach(dropdown => {
-        const toggleBtn = dropdown.querySelector('a');
-        if (window.innerWidth <= 767) {
-            toggleBtn.addEventListener('click', (e) => {
-                if (dropdown.classList.contains('active')) {
-                    dropdown.classList.remove('active');
-                } else {
+                dropdowns.forEach(d => d.classList.remove('active'));
+            });
+        } else {
+            // For dropdown submenu links, close the menu on click
+            const submenuLinks = link.parentElement.querySelectorAll('.dropdown-menu a');
+            submenuLinks.forEach(sublink => {
+                sublink.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    body.classList.remove('menu-open');
                     dropdowns.forEach(d => d.classList.remove('active'));
-                    dropdown.classList.add('active');
-                    e.preventDefault();
-                }
+                });
             });
         }
+    });
+
+    // Handle dropdown toggle on mobile
+    dropdowns.forEach(dropdown => {
+        const toggleBtn = dropdown.querySelector('a');
+        
+        toggleBtn.addEventListener('click', (e) => {
+            // Only prevent default and toggle on mobile
+            if (window.innerWidth <= 767) {
+                e.preventDefault();
+                
+                // Close all other dropdowns
+                dropdowns.forEach(d => {
+                    if (d !== dropdown) {
+                        d.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current dropdown
+                dropdown.classList.toggle('active');
+            }
+        });
     });
 
     // Close menu on window resize and on overlay click
