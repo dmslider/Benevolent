@@ -109,8 +109,21 @@ function initMobileMenu() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-menu a');
+    const navbar = document.querySelector('.navbar');
 
     if (!hamburger) return;
+
+    // Calculate navbar height and set menu position
+    function updateMenuPosition() {
+        if (window.innerWidth <= 767 && navbar) {
+            const navbarHeight = navbar.offsetHeight;
+            navMenu.style.top = navbarHeight + 'px';
+        }
+    }
+
+    // Initial setup
+    updateMenuPosition();
+    window.addEventListener('resize', updateMenuPosition);
 
     // Toggle menu on hamburger click
     hamburger.addEventListener('click', () => {

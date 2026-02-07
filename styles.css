@@ -178,6 +178,8 @@ main {
     max-width: 1400px;
     margin: 0 auto;
     padding: var(--spacing-md) var(--spacing-lg);
+    position: relative;
+    width: 100%;
 }
 
 .logo-section {
@@ -1324,10 +1326,9 @@ section {
 
     .nav-menu {
         position: fixed;
-        top: 60px;
+        top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
         background-color: var(--primary-white);
         flex-direction: column;
         list-style: none;
@@ -1338,10 +1339,12 @@ section {
         gap: 0;
         border-bottom: 2px solid var(--primary-black);
         z-index: 999;
+        width: 100%;
     }
 
     .nav-menu.active {
-        max-height: calc(100vh - 60px);
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
     }
 
     .nav-menu li {
