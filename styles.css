@@ -1327,24 +1327,26 @@ section {
     .nav-menu {
         position: fixed;
         top: 0;
-        left: 0;
-        right: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
         background-color: var(--primary-white);
         flex-direction: column;
         list-style: none;
-        max-height: 0;
         overflow-y: auto;
         overflow-x: hidden;
-        transition: max-height var(--transition-base);
+        -webkit-overflow-scrolling: touch;
+        transition: left var(--transition-base);
         gap: 0;
-        border-bottom: 2px solid var(--primary-black);
+        border-right: 2px solid var(--primary-black);
         z-index: 999;
-        width: 100%;
+        padding-top: 0;
+        display: flex;
     }
 
     .nav-menu.active {
-        max-height: calc(100vh - 80px);
-        overflow-y: auto;
+        left: 0;
     }
 
     .nav-menu li {
@@ -1356,6 +1358,25 @@ section {
         display: block;
         padding: var(--spacing-md) var(--spacing-lg);
         border: none;
+        color: var(--text-dark);
+        font-weight: 500;
+        transition: background-color var(--transition-fast);
+    }
+
+    .nav-menu a:active {
+        background-color: var(--light-bg);
+    }
+
+    /* Overlay for side menu */
+    body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 998;
     }
 
     .dropdown-menu {
@@ -1375,7 +1396,7 @@ section {
     .dropdown.active .dropdown-menu {
         opacity: 1;
         visibility: visible;
-        max-height: 500px;
+        max-height: 400px;
         padding: var(--spacing-sm) 0;
         overflow-y: auto;
     }
