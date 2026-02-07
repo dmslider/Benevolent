@@ -1326,73 +1326,65 @@ section {
 
     .nav-menu {
         position: fixed;
-        top: 0;
-        left: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background-color: var(--primary-white);
+        top: 70px;
+        left: 0;
+        width: 100%;
+        max-height: 0;
+        background-color: #ffffff;
         flex-direction: column;
         list-style: none;
-        overflow-y: auto;
-        overflow-x: hidden;
+        overflow: hidden;
         -webkit-overflow-scrolling: touch;
-        transition: left var(--transition-base);
-        gap: 0;
-        border-right: 2px solid var(--primary-black);
+        transition: max-height 0.3s ease;
         z-index: 999;
-        padding-top: 0;
-        display: flex;
+        padding: 0;
+        margin: 0;
+        border-bottom: 1px solid #e5e5e5;
     }
 
     .nav-menu.active {
-        left: 0;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
     }
 
     .nav-menu li {
         padding: 0;
-        border-bottom: 1px solid var(--border-color);
+        margin: 0;
+        border-bottom: 1px solid #f0f0f0;
+        list-style: none;
     }
 
     .nav-menu a {
         display: block;
-        padding: 15px var(--spacing-lg);
+        padding: 16px 20px;
         border: none;
-        color: var(--text-dark);
+        color: #333;
         font-weight: 500;
-        transition: background-color var(--transition-fast);
         font-size: 15px;
+        text-align: center;
+        transition: background-color 0.2s ease;
     }
 
-    .nav-menu li:not(.dropdown) a:active,
-    .dropdown > a:active {
-        background-color: #f0f0f0;
+    .nav-menu a:active {
+        background-color: #f5f5f5;
     }
 
-    /* Overlay for side menu */
-    body.menu-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.0);
-        z-index: 998;
-    }
-
-    /* Mobile Dropdown Styling */
+    /* Dropdown Styling - Mobile */
     .dropdown > a {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
+        padding-right: 20px;
+        position: relative;
     }
 
     .dropdown > a::after {
         content: '▼';
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         transition: transform 0.3s ease;
-        margin-left: var(--spacing-sm);
+        position: absolute;
+        right: 20px;
+        flex-shrink: 0;
     }
 
     .dropdown.active > a::after {
@@ -1408,7 +1400,7 @@ section {
         box-shadow: none;
         border: none;
         padding: 0;
-        background: #f5f5f5;
+        background: #fafafa;
         overflow: hidden;
         transition: all 0.3s ease;
     }
@@ -1417,20 +1409,20 @@ section {
         opacity: 1;
         visibility: visible;
         max-height: 1000px;
-        padding: var(--spacing-sm) 0;
         overflow-y: auto;
     }
 
     .dropdown-menu li a {
-        padding-left: calc(var(--spacing-lg) * 2.5);
-        font-size: 0.9rem;
-        color: #555;
+        padding-left: 0;
+        text-align: center;
+        font-size: 14px;
+        color: #666;
         padding-top: 12px;
         padding-bottom: 12px;
     }
 
     .dropdown-menu li a:active {
-        background-color: #efefef;
+        background-color: #f0f0f0;
     }
 
     body.menu-open {
